@@ -29,8 +29,8 @@ resources:
   - llama-stack/template.yaml
 
   # safety-model resources
-  - safety-model/svc.yaml
-  - safety-model/vllm.yaml
+  # - safety-model/svc.yaml
+  # - safety-model/vllm.yaml
 
   # streamlit-client resources
   - streamlit-client/deployment.yaml

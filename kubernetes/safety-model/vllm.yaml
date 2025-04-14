@@ -67,8 +67,3 @@ spec:
         name: chat-template
       - emptyDir: {}
         name: config
-      tolerations:
-      - key: nvidia.com/gpu
-        operator: Equal
-        value: "True"
-        effect: NoSchedule
