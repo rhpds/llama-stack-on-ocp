@@ -7,18 +7,18 @@ resources:
   - llama-serve/granite-8b/route.yaml
   - llama-serve/granite-8b/service.yaml
   - llama-serve/granite-8b/vllm.yaml
-  - llama-serve/llama3.1-70b/chat-template.yaml
-  - llama-serve/llama3.1-70b/route.yaml
-  - llama-serve/llama3.1-70b/service.yaml
-  - llama-serve/llama3.1-70b/vllm.yaml
-  - llama-serve/llama3.2-3b/chat-template.yaml
-  - llama-serve/llama3.2-3b/route.yaml
-  - llama-serve/llama3.2-3b/service.yaml
-  - llama-serve/llama3.2-3b/vllm.yaml
-  - llama-serve/watt-8b/chat-template.yaml
-  - llama-serve/watt-8b/route.yaml
-  - llama-serve/watt-8b/service.yaml
-  - llama-serve/watt-8b/vllm.yaml
+  # - llama-serve/llama3.1-70b/chat-template.yaml
+  # - llama-serve/llama3.1-70b/route.yaml
+  # - llama-serve/llama3.1-70b/service.yaml
+  # - llama-serve/llama3.1-70b/vllm.yaml
+  # - llama-serve/llama3.2-3b/chat-template.yaml
+  # - llama-serve/llama3.2-3b/route.yaml
+  # - llama-serve/llama3.2-3b/service.yaml
+  # - llama-serve/llama3.2-3b/vllm.yaml
+  # - llama-serve/watt-8b/chat-template.yaml
+  # - llama-serve/watt-8b/route.yaml
+  # - llama-serve/watt-8b/service.yaml
+  # - llama-serve/watt-8b/vllm.yaml
 
   # llama-stack resources
   - llama-stack/configmap.yaml
