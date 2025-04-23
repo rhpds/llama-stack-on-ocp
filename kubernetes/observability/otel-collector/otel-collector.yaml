@@ -113,10 +113,3 @@ spec:
     metrics:
       enableMetrics: true
   upgradeStrategy: automatic
-  #volumeMounts:
-  #- mountPath: /certs
-  #  name: mtls-certs
-  #volumes:
-  #- secret:
-  #    secretName: mtls-certs
-  #  name: mtls-certs
