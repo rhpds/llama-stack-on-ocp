@@ -1,11 +1,23 @@
 # Llama Stack Demos
-## Overview
-This document provides an overview of the architecture and deployment process for the Llama Stack on OpenShift (OCP). It demonstrates how the Llama Stack agentic framework, vLLM agents, and multiple MCP servers are interconnected and deployed within an OpenShift cluster. The architecture diagram below illustrates the logical flow and integration of these components.
+
+This repo contains a collection of examples and demos for both cluster admins and AI developers to help them start building [Llama Stack](https://github.com/meta-llama/llama-stack) based apps on OpenShift or Kubernetes.
+
+**For Cluster Admins**, please take a look at the [kubernetes/](./kubernetes/) directory of this repo. It contains useful documentation along with all the manifests required to deploy each of the components of a Llama Stack based app onto OpenShift or Kubernetes. That includes Llama Stack itself, as well as [vLLM](https://docs.vllm.ai/en/stable/index.html) model servers, [MCP](https://github.com/modelcontextprotocol) tool servers, an observability toolkit, and simple frontend apps for users to interact with the AI demos.
+
+**For AI Developers**, please take a look at the [demos/](./demos/) directory of this repo. It contains useful documentation as well as all the notebooks, Containerfiles and application code needed to learn about developing AI applications with Llama Stack and deploying them on OpenShift or Kubernetes.
+
+Current Demos:
+
+* [RAG/Agentic](./demos/rag_agentic/)
+
+
+## Example Architecture
+The below diagram is an example architecture for a secure Llama Stack based application deployed on OpenShift (OCP) using both MCP tools and a [Milvus](https://milvus.io/) vectorDB for its agentic and RAG based workflows. This is the same architecture that has been implemented in the [RAG/Agentic](./demos/rag_agentic/) demos.
 
 ![Architecture Diagram](./images/architecture-diagram.jpg)
 
 ## Requirements
-The following scenario requires at minimum the following:
+The following scenarios requires at minimum the following:
 
 * OpenShift Cluster 4.17+
 * 8 GPUs free (A100 or H100)

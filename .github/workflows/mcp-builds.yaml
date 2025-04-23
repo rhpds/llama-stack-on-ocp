@@ -3,11 +3,11 @@ on:
   push:
     branches: [ main ]
     paths:
-    - 'mcp-servers/**'
+    - 'kubernetes/mcp-servers/**'
   pull_request:
     branches: [ main ]
     paths:
-    - 'mcp-servers/**'
+    - 'kubernetes/mcp-servers/**'
 
 jobs:
   ansible:
@@ -27,7 +27,8 @@ jobs:
 
       - name: build and push the ansible mcp server
         run: |
-           cd mcp-servers/ansible
+           cd kubernetes/mcp-servers/ansible-mcp/mcp-containerfile
+           mkdir -p submodule/mcp
            curl -ssL -o submodule/mcp/ansible.py https://raw.githubusercontent.com/suppathak/mcp/refs/heads/main/ansible.py
            podman build -t quay.io/redhat-et/mcp-ansible:latest .
 
@@ -53,7 +54,7 @@ jobs:
 
       - name: build and push the custom mcp server
         run: |
-            cd mcp-servers/custom
+            cd kubernetes/mcp-servers/custom-mcp/mcp-containerfile
             podman build -t quay.io/redhat-et/mcp-custom:latest .
 
       - name: push the ansible mcp server when merge into main
@@ -78,7 +79,7 @@ jobs:
 
       - name: build and push the github mcp server
         run: |
-            cd mcp-servers/github
+            cd kubernetes/mcp-servers/github-mcp/mcp-containerfile
             podman build -t quay.io/redhat-et/mcp-github:latest .
 
       - name: push the ansible mcp server when merge into main
@@ -103,7 +104,7 @@ jobs:
 
       - name: build and push the openshift mcp server
         run: |
-            cd mcp-servers/openshift
+            cd kubernetes/mcp-servers/openshift-mcp/mcp-containerfile
             podman build -t quay.io/redhat-et/mcp-openshift:latest .
 
       - name: push the ansible mcp server when merge into main

@@ -21,15 +21,15 @@ Quay images are required to serve as a blue print on OCP deployment.
 ### Navigate to quay.io
 Login through SSO
 
-<img src="imgs/quay_io_login.png" alt="quay_io_login" width="80%">
+<img src="images/quay_io_login.png" alt="quay_io_login" width="80%">
 
 ### Create Empty Repository
 
-<img src="imgs/quay_io_create.png" alt="quay_io_create" width="80%">
+<img src="images/quay_io_create.png" alt="quay_io_create" width="80%">
 
 When creating new image, make sure to select to **public** to your images.
 
-<img src="imgs/quay_io_create2.png" alt="quay_io_create2" width="80%">
+<img src="images/quay_io_create2.png" alt="quay_io_create2" width="80%">
 
 ### Build and Push Quay Image through Podman
 Building and pushing quay images are recommended with Podman and Podman Desktop. Download them here: https://podman-desktop.io/.
@@ -67,13 +67,13 @@ Navigate to your Red Hat OpenShift Container Platform to proceed with deployment
 ### Creating Deployment
 Select or create the proper namespace/project for your deployment and proceed with creation.
 
-<img src="imgs/ocp_deployment.png" alt="ocp_deployment" width="80%">
+<img src="images/ocp_deployment.png" alt="ocp_deployment" width="80%">
 
 Specify the pod managements and application workload. Make sure to select proper quay.io image.
 
-<img src="imgs/ocp_deployment_yaml.png" alt="ocp_deployment_yaml" width="80%">
+<img src="images/ocp_deployment_yaml.png" alt="ocp_deployment_yaml" width="80%">
 
 ### Deployment Status
 After deployment, you should be able to see your deployment status here.
 
-<img src="imgs/ocp_deployment_success.png" alt="ocp_deployment_success" width="80%">
+<img src="images/ocp_deployment_success.png" alt="ocp_deployment_success" width="80%">

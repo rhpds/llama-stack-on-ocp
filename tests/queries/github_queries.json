@@ -51,7 +51,7 @@
     },
     {
       "query": "Get pull request comments of pr number 18 in the 'llama-stack-on-ocp' repository by 'redhat-et'.",
-      "tool_call": "get_pull_request_commits"
+      "tool_call": "get_pull_request_comments"
     },
     {
       "query": "Get the reviews of pull request number 20 in the 'llama-stack-on-ocp' repository by 'redhat-et'.",

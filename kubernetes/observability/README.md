@@ -63,7 +63,7 @@ oc apply --kustomize ./tempo -n observability-hub
 OpenTelemetry Collector is used to aggregate telemetry from various workloads, process individual signals, and export
 to various backends. This example will collect traces from various workloads and export all as a single
 authenticated stream to the in-cluster TempoStack. For in-cluster only, opentelemetry-collector is not necessary to collect
-metrics. Metrics are sent to the in-cluster user-workload-monitoring prometheus by creating the podmonitors and servicemonitors.
+metrics. Metrics are sent to the in-cluster user-workload-monitoring prometheus by creating podmonitors and/or servicemonitors.
 However, if exporting off-cluster to a 3rd party observability vendor, the collector is necessary for all signals,
 and can provide a single place with which to receive telemetry from various workloads and export as a single authenticated and
 secure OTLP stream.
@@ -85,36 +85,18 @@ cluster. Paired with an annotation on the deployment, telemetry will be exported
 
 Any deployment with the `template.metadata.annotations` `sidecar.opentelemetry.io/inject: vllm-otelsidecar`
 will receive and export telemetry as configured in the
-[otel-collector-vllm-sidecar.yaml](./otel-collector/otel-collector-vllm-sidecar.yaml).
+[otel-collector-vllm-sidecar example](./otel-collector/otel-collector-vllm-sidecar.yaml).
 
 Any deployment with the `template.metadata.annotations` `sidecar.opentelemetry.io/inject: llamastack-otelsidecar`
 will receive and export telemetry as configured in the
-[otel-collector-llamstack-sidecar.yaml](./otel-collector/otel-collector-llamastack-sidecar.yaml).
+[otel-collector-llamstack-sidecar example](./otel-collector/otel-collector-llamastack-sidecar.yaml).
 
-The example below will add otel-collector sidecar custom resources to the `llama-serve` namespace,
-and upon a scale down, scale up of the deployments with the added annotations, sidecar otel-collector
-containers will be added to the pods.
-
-```bash
-oc apply -f ./otel-collector/otel-collector-vllm-sidecar.yaml -n llama-serve
-oc apply -f ./otel-collector/otel-collector-llamastack-sidecar.yaml -n llama-serve
-
-# Then, annotate whatever deployment you'd like to collect telemetry from
-# Add the annotation to the deployment's `template.metadata.annotations` from the console.
-# OR
-# Patch or modify the llamastack and vLLM deployments with the appropriate annotation.
-# Replace `deployment-name`, `namespace`, and `name-of-otelsideccar` in the below command.
-
-oc patch deployment deployment-name \
-  -n namespace \
-  --type='merge' \
-  -p '{"spec":{"template":{"metadata":{"annotations":{"sidecar.opentelemetry.io/inject":"name-of-otelsidecar"}}}}}'
-```
 
 ### Cluster Observability Operator Tracing UIPlugin
 
-The Jaeger frontend feature of TempoStack is no longer supported by Red Hat. This has been replaced by the COO UIPlugin. To create the UIPlugin for
-Tracing, first ensure the TempoStack described above is created. This is a prerequisite. Then, all that's necessary to view traces from
+OpenShift provides a Tracing UI and Dashboards similar to how it provides a prometheus metrics explorer with user-workload-monitoring.
+The Jaeger frontend feature of TempoStack is no longer supported by Red Hat. This has been replaced by the COO UIPlugin.
+To create the `UIPlugin for Distributed Tracing`, first ensure the TempoStack described above is created. This is a prerequisite. Then, all that's necessary to view traces from
 the OpenShift console at `Observe -> Traces` is to create the following [Tracing UIPlugin resource](./tracing-ui-plugin.yaml).
 
 ```bash

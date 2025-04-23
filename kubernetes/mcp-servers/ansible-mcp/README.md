@@ -17,6 +17,7 @@ Quick guide to build and deploy an Ansible MCP server on OpenShift Container Pla
 
 ```bash
 # Build for amd64 (required for OpenShift)
+cd mcp-containerfile
 podman build --arch amd64 --os linux -t quay.io/<your-username>/ansible-mcp:amd-0.1.0 -f Containerfile .
 
 # Push to Quay

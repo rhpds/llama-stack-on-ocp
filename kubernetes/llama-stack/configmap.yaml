@@ -32,13 +32,6 @@ data:
           max_tokens: 128000
           api_token: fake
           tls_verify: false
-      - provider_id: vllm-safety
-        provider_type: remote::vllm
-        config:
-          url: ${env.SAFETY_VLLM_URL}
-          max_tokens: 4096
-          api_token: fake
-          tls_verify: false
       - provider_id: sentence-transformers
         provider_type: inline::sentence-transformers
         config: {}
@@ -47,11 +40,6 @@ data:
         provider_type: inline::milvus
         config:
          db_path: ${env.MILVUS_DB_PATH}
-      safety:
-      - provider_id: llama-guard
-        provider_type: inline::llama-guard
-        config:
-          excluded_categories: []
       agents:
       - provider_id: meta-reference
         provider_type: inline::meta-reference
@@ -134,18 +122,11 @@ data:
       model_id: ${env.GRANITE_MODEL}
       provider_id: granite
       model_type: llm
-    - metadata: {}
-      model_id: ${env.SAFETY_MODEL}
-      provider_id: vllm-safety
-      model_type: llm
     - metadata:
         embedding_dimension: 384
       model_id: all-MiniLM-L6-v2
       provider_id: sentence-transformers
       model_type: embedding
-    shields:
-    - shield_id: ${env.SAFETY_MODEL}
-      provider_id: llama-guard
     vector_dbs: []
     datasets: []
     scoring_fns: []
@@ -157,3 +138,7 @@ data:
       provider_id: rag-runtime
     - toolgroup_id: builtin::code_interpreter
       provider_id: code-interpreter
+    - toolgroup_id: mcp::openshift
+      provider_id: model-context-protocol
+      mcp_endpoint:
+        uri: "http://ocp-mcp-server.llama-serve.svc.cluster.local:8000/sse"

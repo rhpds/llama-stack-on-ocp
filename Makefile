@@ -8,7 +8,7 @@ build_ui:
 	podman build -t streamlit_client:latest --platform="linux/amd64" -f demos/rag_agentic/frontend/build/Containerfile .
 
 run_ui:
-	 podman run -it -p 8501:8501 --env LLAMA_STACK_ENDPOINT=$(LLAMA_STACK_ENDPOINT) streamlit_client:latest
+	 podman run -it -p 8501:8501 --env LLAMA_STACK_ENDPOINT=$(LLAMA_STACK_ENDPOINT) --env TAVILY_SEARCH_API_KEY=$(TAVILY_SEARCH_API_KEY) streamlit_client:latest
 
 run_mcp:
 	python build_mcp/mcp_tools.py

@@ -36,6 +36,8 @@ spec:
             # service/vllm in ns/llama-serve
             # add any service.ns.svc.cluster.local:port that includes a /metrics endpoint
             # If you use otel-sidecars in each deployment, you do not need to list them here.
+            # The sidecar otel-collector will use the prometheus receiver and metrics will be exported
+            # as otlp metrics to this central observability-collector.
             - job_name: vllm-llama-serve
               scrape_interval: 15s
               static_configs:
@@ -66,9 +68,8 @@ spec:
       batch:
         send_batch_size: 100
         timeout: 1s
-      # cumulativetodelta necessary to export to dynatrace
-      # Dynatrace only accepts delta metrics
-      # OCP user-workload-monitoring only accepts cumulative metrics
+      # cumulativetodelta necessary to export to some observability vendors.
+      # For example, Dynatrace only accepts delta metrics
       #cumulativetodelta: {}
       memory_limiter:
         check_interval: 5s
@@ -82,7 +83,6 @@ spec:
         metrics:
           exporters:
           - debug
-          #- prometheus/ocp-uwm
           #- otlphttp/dynatrace
           receivers:
           - otlp

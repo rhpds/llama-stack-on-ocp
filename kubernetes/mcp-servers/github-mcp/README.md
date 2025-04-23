@@ -14,6 +14,7 @@ You will need the following installed on your local machine:
 
 You will need to first build a container image using the `Containerfile` and can do this by using `podman`. To build the container image from the current directory:
 ```
+cd mcp-containerfile
 podman build -t github-mcp-server:latest -f Containerfile
 ```
 If running on a Mac:

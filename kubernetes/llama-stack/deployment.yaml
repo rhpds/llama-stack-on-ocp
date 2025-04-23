@@ -3,15 +3,17 @@ apiVersion: apps/v1
 metadata:
   name: llamastack-deployment
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: llamastack
   template:
     metadata:
-      annotations:
-        sidecar.opentelemetry.io/inject: llamastack-otelsidecar
+      creationTimestamp: null
       labels:
         app: llamastack
+      annotations:
+        openshift.openshift.io/restartedAt: '2025-04-14T19:21:43.475Z'
     spec:
       volumes:
         - name: run-config-volume
@@ -47,13 +49,11 @@ spec:
             - name: OTEL_SERVICE_NAME
               value: om-llamastack
             - name: OTEL_TRACE_ENDPOINT
-              value: 'http://localhost:4318/v1/traces'
-            - name: SAFETY_MODEL
-              value: meta-llama/Llama-Guard-3-8B
-            - name: SAFETY_VLLM_URL
-              value: 'http://safety.llama-serve.svc.cluster.local:8000/v1'
+              value: 'http://otel-collector-collector.observability-hub.svc.cluster.local:4318/v1/traces'
             - name: MILVUS_DB_PATH
               value: milvus.db
+            - name: LLAMA_STACK_LOG
+              value: debug
           ports:
             - containerPort: 8321
               protocol: TCP
@@ -68,8 +68,19 @@ spec:
             - name: cache
               mountPath: /.cache
           terminationMessagePolicy: File
-          image: 'quay.io/redhat-et/llama:vllm-0.1.9'
+          image: 'quay.io/redhat-et/llama:vllm-0.2.2'
           args:
             - '--config'
             - /app-config/config.yaml
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
       securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600

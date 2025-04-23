@@ -4,7 +4,7 @@
 apiVersion: opentelemetry.io/v1beta1
 kind: OpenTelemetryCollector
 metadata:
-  name: llamastack-otelsidecar
+  name: llamastack-otelsidecar-example
 spec:
   observability:
     metrics: {}

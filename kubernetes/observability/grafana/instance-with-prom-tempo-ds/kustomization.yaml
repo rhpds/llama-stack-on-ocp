@@ -6,6 +6,5 @@ resources:
 - grafana-instance.yaml
 - role.yaml
 - sa-token-secret.yaml
-- grafana-sa.yaml
 - route.yaml
 - datasources.yaml
