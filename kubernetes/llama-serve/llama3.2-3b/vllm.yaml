@@ -67,6 +67,11 @@ spec:
             - '--port'
             - '8000'
       restartPolicy: Always
+      tolerations:
+      - key: nvidia.com/gpu
+        operator: Equal
+        value: "True"
+        effect: NoSchedule
       terminationGracePeriodSeconds: 30
       dnsPolicy: ClusterFirst
       securityContext: {}
