@@ -69,17 +69,6 @@ spec:
             - '8000'
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
-      volumes:
-      - emptyDir: {}
-        name: hf-cache
-      - emptyDir: {}
-        name: triton
-      - configMap:
-          defaultMode: 420
-          name: granite-chat
-        name: chat-template
-      - emptyDir: {}
-        name: config
       tolerations:
       - key: nvidia.com/gpu
         operator: Equal
