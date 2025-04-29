@@ -8,8 +8,6 @@ metadata:
     sidecar.istio.io/rewriteAppHTTPProbers: 'true'
     argocd.argoproj.io/sync-wave: "2"
   name: llama32-3b
-  finalizers:
-    - inferenceservice.finalizers
   labels:
     opendatahub.io/dashboard: 'true'
 spec:
