@@ -31,3 +31,9 @@ spec:
           nvidia.com/gpu: '1'
       runtime: granite32-8b
       storageUri: 'oci://quay.io/redhat-ai-services/modelcar-catalog:granite-3.2-8b-instruct'
+    containerConcurrency: 1
+    tolerations:
+    - key: "nvidia.com/gpu"
+      operator: "Equal"
+      value: "True"
+      effect: "NoSchedule"

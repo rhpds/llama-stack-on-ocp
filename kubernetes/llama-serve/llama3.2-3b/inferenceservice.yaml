@@ -31,3 +31,9 @@ spec:
           nvidia.com/gpu: '1'
       runtime: llama32-3b
       storageUri: 'oci://quay.io/redhat-ai-services/modelcar-catalog:llama-3.2-3b-instruct'
+    containerConcurrency: 1
+    tolerations:
+    - key: "nvidia.com/gpu"
+      operator: "Equal"
+      value: "True"
+      effect: "NoSchedule"
