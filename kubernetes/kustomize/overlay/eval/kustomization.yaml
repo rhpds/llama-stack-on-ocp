@@ -5,7 +5,15 @@ resources:
   # llama-serve resources
   - ../../../llama-serve/granite-8b
   - ../../../llama-serve/llama3.2-3b
-  - ../../../mcp-servers/slack-mcp
 
 patchesStrategicMerge:
-  - remove-tavily-env.yaml
+  - add-openai.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+configMapGenerator:
+  - name: run-config
+    behavior: replace
+    files:
+      - config.yaml=run.yaml

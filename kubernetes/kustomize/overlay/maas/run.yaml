@@ -1,3 +1,5 @@
+﻿# Note this is a run.yaml file based on the remote-vllm distribution
+# More information found here:
 version: '2'
 image_name: remote-vllm
 apis:
@@ -12,19 +14,12 @@ apis:
 - vector_io
 providers:
   inference:
-  - provider_id: llama-3b
+  - provider_id: ${env.MAAS_MODEL_TYPE:llama-3b}
     provider_type: remote::vllm
     config:
-      url: ${env.LLAMA3B_URL}
+      url: ${env.MAAS_URL:fake}
       max_tokens: 128000
-      api_token: fake
-      tls_verify: false
-  - provider_id: granite
-    provider_type: remote::vllm
-    config:
-      url: ${env.GRANITE_URL}
-      max_tokens: 128000
-      api_token: fake
+      api_token: ${env.MAAS_API_TOKEN:fake}
       tls_verify: false
   - provider_id: sentence-transformers
     provider_type: inline::sentence-transformers
@@ -81,8 +76,9 @@ providers:
     provider_type: inline::meta-reference
     config:
       service_name: ${env.OTEL_SERVICE_NAME:llama-stack}
-      sinks: ${env.TELEMETRY_SINKS:console, otel_trace, sqlite}
-      otel_trace_endpoint: ${env.OTEL_TRACE_ENDPOINT:}
+      sinks: ${env.TELEMETRY_SINKS:console,sqlite}
+  #     sinks: ${env.TELEMETRY_SINKS:console, otel_trace, sqlite}
+  #     otel_trace_endpoint: ${env.OTEL_TRACE_ENDPOINT:}
       sqlite_db_path: ${env.SQLITE_DB_PATH:~/.llama/distributions/remote-vllm/trace_store.db}
   tool_runtime:
   - provider_id: brave-search
@@ -109,12 +105,8 @@ metadata_store:
   db_path: ${env.SQLITE_STORE_DIR:~/.llama/distributions/remote-vllm}/registry.db
 models:
 - metadata: {}
-  model_id: ${env.LLAMA3B_MODEL}
-  provider_id: llama-3b
-  model_type: llm
-- metadata: {}
-  model_id: ${env.GRANITE_MODEL}
-  provider_id: granite
+  model_id: ${env.MAAS_MODEL_NAME}
+  provider_id: ${env.MAAS_MODEL_TYPE:llama-3b}
   model_type: llm
 - metadata:
     embedding_dimension: 384
@@ -136,4 +128,3 @@ tool_groups:
   provider_id: model-context-protocol
   mcp_endpoint:
     uri: "http://ocp-mcp-server:8000/sse"
-
