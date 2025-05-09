@@ -33,6 +33,7 @@ spec:
           mkdir -p /workspace/
           cp -r /tmp/repo/demos/rag_agentic/notebooks/* /workspace/
           mkdir /workspace/src
+          mkdir /workspace/images
           cp -r /tmp/repo/demos/rag_agentic/src/utils.py /workspace/src/
           cp -r /tmp/repo/demos/rag_agentic/src/client_tools.py /workspace/src/
           cp -r /tmp/repo/demos/rag_agentic/images/slack-message.png /workspace/images/slack-message.png
